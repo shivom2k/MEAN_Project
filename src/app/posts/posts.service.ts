@@ -10,19 +10,23 @@ export class PostsService  {
   private postsUpdated = new Subject<Post[]>();
   constructor(private readonly http:HttpClient){}
 
-   getpost(){
+  getPosts() {
     this.http.get<{message: string, posts: Post[]}>('http://localhost:3000/api/posts').subscribe((postData) => {
       this.posts = postData.posts
       this.postsUpdated.next([...this.posts]);
      });
-   }
+  }
+
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
 
   addPost(title: string, content: string) {
-    const post: Post = {title: title, content: content};
-    this.posts.push(post);
-    this.postsUpdated.next([...this.posts]);
+    const post: Post = {id:null,title: title, content: content};
+    this.http.post<{message:string}>('http://localhost:3000/api/posts',post).subscribe((postData)=>{
+      console.log(postData.message);
+      this.posts.push(post);
+      this.getPosts();
+    })
   }
 }

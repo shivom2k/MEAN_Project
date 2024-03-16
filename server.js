@@ -11,7 +11,6 @@
 // const app = require('./backend/app');
 // app.set('port', process.env.PORT || 3000);
 // const server = http.createServer(app);
-
 // server.listen(process.env.PORT || 300);
 // The above code is the same as the code in server.js. The only difference is that the server is created using the http module and the createServer method. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client.
 
