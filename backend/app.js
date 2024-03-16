@@ -2,6 +2,8 @@ var express=require('express');
 var bodyParser=require('body-parser');
 var cors=require('cors');
 var app=express();
+const Post=require('./model/post');
+const mongoose=require('mongoose'); 
 const posts=[
     {
         id:'fadf12421l',
@@ -14,6 +16,14 @@ const posts=[
         content:'This is coming from the server'
     }
 ];
+
+mongoose.connect('mongodb+srv://shivomchawla2000:HKvHoluuaXle9NOU@cluster0.kywlcmt.mongodb.net/?retryWrites=true&w=majority')
+.then(()=>{
+    console.log('Connected to database!');
+})
+.catch(()=>{
+    console.log('Connection failed');
+});
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*'); // * means any domain can access the server
     res.setHeader('Acess-Control-Allow-Headers','Origin,X-Requested-With,Content-Type,Accept'); // * means any domain can access the server
@@ -24,7 +34,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.post('/api/posts',(req,res,next)=>{
-    const post=req.body;
+    const post= new Post({
+        title: req.body.title,
+        content: req.body.content
+    });
     posts.push(post);
     console.log(posts);
     res.status(201).json({
