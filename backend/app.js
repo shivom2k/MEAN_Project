@@ -17,7 +17,7 @@ const posts=[
     }
 ];
 
-mongoose.connect('mongodb+srv://shivomchawla2000:HKvHoluuaXle9NOU@cluster0.kywlcmt.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://shivomchawla2000:HKvHoluuaXle9NOU@cluster0.kywlcmt.mongodb.net/test?retryWrites=true&w=majority')
 .then(()=>{
     console.log('Connected to database!');
 })
@@ -38,19 +38,22 @@ app.post('/api/posts',(req,res,next)=>{
         title: req.body.title,
         content: req.body.content
     });
+    post.save();
     posts.push(post);
     console.log(posts);
     res.status(201).json({
         message:'Post added successfully'
     });
 })
-app.use('/api/posts',(req,res,next)=>{
+app.get('/api/posts',(req,res,next)=>{
 
-    
-    res.status(200).json({
-        message:'Posts fetched successfully!',
-        posts:posts
-    });
+    Post.find().then(documents=>{
+        console.log(documents);
+        res.status(200).json({
+            message:'Posts fetched successfully!',
+            posts:documents
+        });
+    }); // this will return a promise
     
 })
 module.exports=app;
