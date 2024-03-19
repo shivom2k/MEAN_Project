@@ -11,6 +11,7 @@ export class PostsService  {
   constructor(private readonly http:HttpClient){}
 
   getPosts() {
+    console.log('getPosts');
     this.http.get<{message: string, posts: any}>('http://localhost:3000/api/posts')
     .pipe(map((postData) => {
       return {posts: postData.posts.map(post => {
@@ -27,7 +28,7 @@ export class PostsService  {
      });
   }
   getPostsById(id: string){
-    return {...this.posts.find(p=>p.id === id)};
+    return this.http.get<{_id:string,title:string,content:string}>('http://localhost:3000/api/posts/'+id);    
   }
 
   getPostUpdateListener() {

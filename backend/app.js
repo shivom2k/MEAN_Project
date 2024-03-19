@@ -64,7 +64,15 @@ app.delete('/api/posts/:id',(req,res,next)=>{
     }); // this will return a promise 
    
 })
-
+app.get('/api/posts/:id',(req,res,next)=>{
+    Post.findById(req.params.id).then(post=>{
+        if(post){
+            res.status(200).json(post);
+        }
+        res.status(404).json({message:'Post not found!'});
+        
+    })
+})
 app.put('/api/posts/:id',(req,res,next)=>{
     const post= new Post({
         title: req.body.title,
