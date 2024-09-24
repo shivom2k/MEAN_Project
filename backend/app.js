@@ -1,24 +1,13 @@
 var express=require('express');
 var bodyParser=require('body-parser');
 var cors=require('cors');
+var path=require('path');
 var app=express();
 const PostRoutes=require('./routes/posts');
 const Post=require('./model/post');
 const mongoose=require('mongoose'); 
-const posts=[
-    {
-        id:'fadf12421l',
-        title:'First server-side post',
-        content:'This is coming from the server'
-    },
-    {
-        id:'154545454',
-        title:'Second server-side post',
-        content:'This is coming from the server'
-    }
-];
 
-mongoose.connect('mongodb+srv://shivomchawla2000:HKvHoluuaXle9NOU@cluster0.kywlcmt.mongodb.net/test?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://shivomchawla2000:ZdAyKoQ9rud35zbM@cluster0.kywlcmt.mongodb.net/test?retryWrites=true&w=majority')
 .then(()=>{
     console.log('Connected to database!');
 })
@@ -34,7 +23,7 @@ app.use((req,res,next)=>{
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+app.use("/images", express.static(path.join("backend/images")));
 app.use('/api/posts',PostRoutes);
-
 
 module.exports=app;

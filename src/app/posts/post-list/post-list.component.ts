@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from 'rxjs';
 
 import { Post } from "../post.model";
@@ -16,8 +16,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   //   { title: "Third Post", content: "This is the third post's content" }
   // ];
   posts: Post[] = [];
+  isLoading = false;
   private postsSub: Subscription;
-  isLoading=false
 
   constructor(public postsService: PostsService) {}
 
@@ -30,10 +30,9 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.posts = posts;
       });
   }
-  onDelete(postId: string){
-    this.isLoading = true;
+
+  onDelete(postId: string) {
     this.postsService.deletePost(postId);
-    this.isLoading = false;
   }
 
   ngOnDestroy() {

@@ -1,19 +1,3 @@
-// var http = require('http');
-
-// const server = http.createServer((req,res)=>{
-//     console.log('Server is running on port 3000');
-//     res.end('Hello World');
-// })
-// server.listen(process.env.PORT || 3000);
-// The above code is the same as the code in server.js. The only difference is that the server is created using the http module and the createServer method. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client.
-
-// var http = require('http');
-// const app = require('./backend/app');
-// app.set('port', process.env.PORT || 3000);
-// const server = http.createServer(app);
-// server.listen(process.env.PORT || 300);
-// The above code is the same as the code in server.js. The only difference is that the server is created using the http module and the createServer method. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client. The server is listening on port 3000. The server is created using the createServer method and the request and response objects are passed as arguments to the callback function. The request and response objects are used to handle the incoming request and send the response back to the client. The response object has a method called end which is used to send the response back to the client.
-
 const app = require("./backend/app");
 const debug = require("debug")("node-angular");
 const http = require("http");
@@ -38,7 +22,7 @@ const onError = error => {
   if (error.syscall !== "listen") {
     throw error;
   }
-  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
   switch (error.code) {
     case "EACCES":
       console.error(bind + " requires elevated privileges");
@@ -54,7 +38,8 @@ const onError = error => {
 };
 
 const onListening = () => {
-  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  const addr = server.address();
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
   debug("Listening on " + bind);
 };
 
