@@ -1,0 +1,17 @@
+{
+  "name": "mean-course",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "core-js": "^3.1.2",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.6.1",
+    "mongoose-unique-validator": "^5.0.1",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.1"
+  }
+}
